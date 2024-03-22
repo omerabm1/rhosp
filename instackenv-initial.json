@@ -1,0 +1,77 @@
+{
+  "nodes": [
+    {
+      "name": "controller0",
+      "arch": "x86_64",
+      "cpu": "2",
+      "disk": "40",
+      "memory": "8192",
+      "mac": [ "52:54:00:00:f9:01" ],
+      "pm_addr": "172.25.249.101",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "admin",
+      "pm_password": "password",
+      "pm_port": "623",
+      "capabilities": "node:controller0,boot_option:local"
+    },
+    {
+      "name": "compute0",
+      "arch": "x86_64",
+      "cpu": "2",
+      "disk": "40",
+      "memory": "6144",
+      "mac": [ "52:54:00:00:f9:02" ],
+      "pm_addr": "172.25.249.102",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "admin",
+      "pm_password": "password",
+      "pm_port": "623",
+      "capabilities": "node:compute0,boot_option:local"
+    },
+    {
+      "name": "computehci0",
+      "arch": "x86_64",
+      "cpu": "2",
+      "disk": "40",
+      "memory": "6144",
+      "mac": [ "52:54:00:00:f9:06" ],
+      "pm_addr": "172.25.249.106",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "admin",
+      "pm_password": "password",
+      "pm_port": "623",
+      "root_device": {"name": "/dev/vdb"},
+      "capabilities": "node:computehci0,boot_option:local"
+    },
+    {
+      "name": "compute1",
+      "arch": "x86_64",
+      "cpu": "2",
+      "disk": "40",
+      "memory": "6144",
+      "mac": [ "52:54:00:00:f9:0c" ],
+      "pm_addr": "172.25.249.112",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "admin",
+      "pm_password": "password",
+      "pm_port": "623",
+      "capabilities": "node:compute1,boot_option:local"
+
+    },
+    {
+      "name": "ceph0",
+      "arch": "x86_64",
+      "cpu": "2",
+      "disk": "40",
+      "memory": "6144",
+      "mac": [ "52:54:00:00:f9:03" ],
+      "pm_addr": "172.25.249.103",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "admin",
+      "pm_password": "password",
+      "pm_port": "623",
+      "root_device": {"name": "/dev/vdb"},
+      "capabilities": "node:ceph0,boot_option:local"
+    }
+  ]
+}

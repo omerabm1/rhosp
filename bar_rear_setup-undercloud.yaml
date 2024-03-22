@@ -1,0 +1,7 @@
+# Playbook
+# Installing and configuring ReaR on the undercloud node
+- become: true
+  hosts: undercloud
+  name: Install ReaR
+  roles:
+  - role: backup-and-restore

@@ -1,0 +1,626 @@
+Undercloud:
+  hosts:
+    undercloud: {}
+  vars:
+    ansible_connection: local
+    ansible_host: localhost
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_remote_tmp: /tmp/ansible-${USER}
+    auth_url: https://172.25.249.201:13000
+    cacert: null
+    os_auth_token: gAAAAABl-tmQfUG9QeSDk9ml6Tc7Apw4aYJW4qHmdA6KC4-guz6Nf7XmW19wVN-fteRAHnO-FxMN6InsalKLAxciAUazlqvA36rCE4FBYdh349S8xWy83-RMICpCyJguhQYQxzRtdayP1kDXiKwLMUipaTs8ErbMEOKltEhem4pPFkvxRj3Oxl8
+    overcloud_admin_password: redhat
+    overcloud_horizon_url: http://172.25.250.50:80/dashboard
+    overcloud_keystone_url: http://172.25.250.50:5000
+    plan: overcloud
+    plans: [overcloud]
+    project_name: admin
+    undercloud_service_list: [tripleo_nova_compute, tripleo_heat_engine, tripleo_ironic_conductor,
+      tripleo_swift_container_server, tripleo_swift_object_server, tripleo_mistral_engine]
+    undercloud_swift_url: https://172.25.249.201:13808/v1/AUTH_90ef963f6dca474ba045e212c7afaa97
+    username: admin
+Controller:
+  children:
+    overcloud_Controller: {}
+overcloud_Controller:
+  hosts:
+    controller0: {ansible_host: 172.25.249.56, canonical_hostname: controller0.overcloud.example.com,
+      ctlplane_hostname: controller0.ctlplane.overcloud.example.com, ctlplane_ip: 172.25.249.56,
+      deploy_server_id: 6d712d0a-cb71-4cdc-93dc-f2d69ffc520b, external_hostname: controller0.external.overcloud.example.com,
+      external_ip: 172.25.250.1, internal_api_hostname: controller0.internalapi.overcloud.example.com,
+      internal_api_ip: 172.24.1.1, management_hostname: controller0.management.overcloud.example.com,
+      management_ip: 172.24.5.1, storage_hostname: controller0.storage.overcloud.example.com,
+      storage_ip: 172.24.3.1, storage_mgmt_hostname: controller0.storagemgmt.overcloud.example.com,
+      storage_mgmt_ip: 172.24.4.1, tenant_hostname: controller0.tenant.overcloud.example.com,
+      tenant_ip: 172.24.2.1}
+  vars:
+    ansible_ssh_user: heat-admin
+    bootstrap_server_id: 6d712d0a-cb71-4cdc-93dc-f2d69ffc520b
+    serial: '1'
+    tripleo_role_name: Controller
+    tripleo_role_networks: [ctlplane, external, internal_api, management, storage,
+      storage_mgmt, tenant]
+Compute:
+  children:
+    overcloud_Compute: {}
+overcloud_Compute:
+  hosts:
+    compute0: {ansible_host: 172.25.249.59, canonical_hostname: compute0.overcloud.example.com,
+      ctlplane_hostname: compute0.ctlplane.overcloud.example.com, ctlplane_ip: 172.25.249.59,
+      deploy_server_id: 0d1b6dc2-361c-4276-9ee4-dd2dd387d075, external_hostname: compute0.external.overcloud.example.com,
+      external_ip: 172.25.250.2, internal_api_hostname: compute0.internalapi.overcloud.example.com,
+      internal_api_ip: 172.24.1.2, management_hostname: compute0.management.overcloud.example.com,
+      management_ip: 172.24.5.2, storage_hostname: compute0.storage.overcloud.example.com,
+      storage_ip: 172.24.3.2, tenant_hostname: compute0.tenant.overcloud.example.com,
+      tenant_ip: 172.24.2.2}
+    compute1: {ansible_host: 172.25.249.53, canonical_hostname: compute1.overcloud.example.com,
+      ctlplane_hostname: compute1.ctlplane.overcloud.example.com, ctlplane_ip: 172.25.249.53,
+      deploy_server_id: b87aaecb-3726-4afc-ab81-43d6a62ca7f0, external_hostname: compute1.external.overcloud.example.com,
+      external_ip: 172.25.250.12, internal_api_hostname: compute1.internalapi.overcloud.example.com,
+      internal_api_ip: 172.24.1.12, management_hostname: compute1.management.overcloud.example.com,
+      management_ip: 172.24.5.12, storage_hostname: compute1.storage.overcloud.example.com,
+      storage_ip: 172.24.3.12, tenant_hostname: compute1.tenant.overcloud.example.com,
+      tenant_ip: 172.24.2.12}
+  vars:
+    ansible_ssh_user: heat-admin
+    bootstrap_server_id: 6d712d0a-cb71-4cdc-93dc-f2d69ffc520b
+    serial: '1'
+    tripleo_role_name: Compute
+    tripleo_role_networks: [ctlplane, external, internal_api, management, storage,
+      tenant]
+CephStorage:
+  children:
+    overcloud_CephStorage: {}
+overcloud_CephStorage:
+  hosts:
+    ceph0: {ansible_host: 172.25.249.58, canonical_hostname: ceph0.overcloud.example.com,
+      ctlplane_hostname: ceph0.ctlplane.overcloud.example.com, ctlplane_ip: 172.25.249.58,
+      deploy_server_id: 3f690637-f062-4f7c-baa6-88ab794bac17, external_hostname: ceph0.external.overcloud.example.com,
+      external_ip: 172.25.250.3, management_hostname: ceph0.management.overcloud.example.com,
+      management_ip: 172.24.5.3, storage_hostname: ceph0.storage.overcloud.example.com,
+      storage_ip: 172.24.3.3, storage_mgmt_hostname: ceph0.storagemgmt.overcloud.example.com,
+      storage_mgmt_ip: 172.24.4.3}
+  vars:
+    ansible_ssh_user: heat-admin
+    bootstrap_server_id: 6d712d0a-cb71-4cdc-93dc-f2d69ffc520b
+    serial: '1'
+    tripleo_role_name: CephStorage
+    tripleo_role_networks: [ctlplane, external, management, storage, storage_mgmt]
+ComputeHCI:
+  children:
+    overcloud_ComputeHCI: {}
+overcloud_ComputeHCI:
+  hosts:
+    computehci0: {ansible_host: 172.25.249.54, canonical_hostname: computehci0.overcloud.example.com,
+      ctlplane_hostname: computehci0.ctlplane.overcloud.example.com, ctlplane_ip: 172.25.249.54,
+      deploy_server_id: b4410745-55a6-490a-baab-803ea4eb9e64, external_hostname: computehci0.external.overcloud.example.com,
+      external_ip: 172.25.250.6, internal_api_hostname: computehci0.internalapi.overcloud.example.com,
+      internal_api_ip: 172.24.1.6, management_hostname: computehci0.management.overcloud.example.com,
+      management_ip: 172.24.5.6, storage_hostname: computehci0.storage.overcloud.example.com,
+      storage_ip: 172.24.3.6, storage_mgmt_hostname: computehci0.storagemgmt.overcloud.example.com,
+      storage_mgmt_ip: 172.24.4.6, tenant_hostname: computehci0.tenant.overcloud.example.com,
+      tenant_ip: 172.24.2.6}
+  vars:
+    ansible_ssh_user: heat-admin
+    bootstrap_server_id: 6d712d0a-cb71-4cdc-93dc-f2d69ffc520b
+    serial: '1'
+    tripleo_role_name: ComputeHCI
+    tripleo_role_networks: [ctlplane, external, internal_api, management, storage,
+      storage_mgmt, tenant]
+allovercloud:
+  children:
+    overcloud_allovercloud: {}
+overcloud_allovercloud:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+overcloud:
+  children:
+    overcloud_allovercloud: {}
+overcloud_overcloud:
+  children:
+    overcloud_allovercloud: {}
+octavia_health_manager:
+  children:
+    overcloud_octavia_health_manager: {}
+overcloud_octavia_health_manager:
+  children:
+    overcloud_Controller: {}
+ca_certs:
+  children:
+    overcloud_ca_certs: {}
+overcloud_ca_certs:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+ceph_mgr:
+  children:
+    overcloud_ceph_mgr: {}
+overcloud_ceph_mgr:
+  children:
+    overcloud_Controller: {}
+neutron_plugin_ml2_ovn:
+  children:
+    overcloud_neutron_plugin_ml2_ovn: {}
+overcloud_neutron_plugin_ml2_ovn:
+  children:
+    overcloud_Controller: {}
+octavia_housekeeping:
+  children:
+    overcloud_octavia_housekeeping: {}
+overcloud_octavia_housekeeping:
+  children:
+    overcloud_Controller: {}
+mysql:
+  children:
+    overcloud_mysql: {}
+overcloud_mysql:
+  children:
+    overcloud_Controller: {}
+chrony:
+  children:
+    overcloud_chrony: {}
+overcloud_chrony:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+octavia_api:
+  children:
+    overcloud_octavia_api: {}
+overcloud_octavia_api:
+  children:
+    overcloud_Controller: {}
+tripleo_packages:
+  children:
+    overcloud_tripleo_packages: {}
+overcloud_tripleo_packages:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+certmonger_user:
+  children:
+    overcloud_certmonger_user: {}
+overcloud_certmonger_user:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+manila_backend_cephfs:
+  children:
+    overcloud_manila_backend_cephfs: {}
+overcloud_manila_backend_cephfs:
+  children:
+    overcloud_Controller: {}
+swift_ringbuilder:
+  children:
+    overcloud_swift_ringbuilder: {}
+overcloud_swift_ringbuilder:
+  children:
+    overcloud_Controller: {}
+memcached:
+  children:
+    overcloud_memcached: {}
+overcloud_memcached:
+  children:
+    overcloud_Controller: {}
+nova_metadata:
+  children:
+    overcloud_nova_metadata: {}
+overcloud_nova_metadata:
+  children:
+    overcloud_Controller: {}
+heat_api_cloudwatch_disabled:
+  children:
+    overcloud_heat_api_cloudwatch_disabled: {}
+overcloud_heat_api_cloudwatch_disabled:
+  children:
+    overcloud_Controller: {}
+tripleo_firewall:
+  children:
+    overcloud_tripleo_firewall: {}
+overcloud_tripleo_firewall:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+container_image_prepare:
+  children:
+    overcloud_container_image_prepare: {}
+overcloud_container_image_prepare:
+  children:
+    overcloud_Controller: {}
+nova_api:
+  children:
+    overcloud_nova_api: {}
+overcloud_nova_api:
+  children:
+    overcloud_Controller: {}
+nova_vnc_proxy:
+  children:
+    overcloud_nova_vnc_proxy: {}
+overcloud_nova_vnc_proxy:
+  children:
+    overcloud_Controller: {}
+nova_libvirt_guests:
+  children:
+    overcloud_nova_libvirt_guests: {}
+overcloud_nova_libvirt_guests:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+mysql_client:
+  children:
+    overcloud_mysql_client: {}
+overcloud_mysql_client:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+pacemaker:
+  children:
+    overcloud_pacemaker: {}
+overcloud_pacemaker:
+  children:
+    overcloud_Controller: {}
+keystone:
+  children:
+    overcloud_keystone: {}
+overcloud_keystone:
+  children:
+    overcloud_Controller: {}
+oslo_messaging_rpc:
+  children:
+    overcloud_oslo_messaging_rpc: {}
+overcloud_oslo_messaging_rpc:
+  children:
+    overcloud_Controller: {}
+kernel:
+  children:
+    overcloud_kernel: {}
+overcloud_kernel:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+swift_proxy:
+  children:
+    overcloud_swift_proxy: {}
+overcloud_swift_proxy:
+  children:
+    overcloud_Controller: {}
+clustercheck:
+  children:
+    overcloud_clustercheck: {}
+overcloud_clustercheck:
+  children:
+    overcloud_Controller: {}
+heat_engine:
+  children:
+    overcloud_heat_engine: {}
+overcloud_heat_engine:
+  children:
+    overcloud_Controller: {}
+manila_scheduler:
+  children:
+    overcloud_manila_scheduler: {}
+overcloud_manila_scheduler:
+  children:
+    overcloud_Controller: {}
+ceph_client:
+  children:
+    overcloud_ceph_client: {}
+overcloud_ceph_client:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+ceph_osd:
+  children:
+    overcloud_ceph_osd: {}
+overcloud_ceph_osd:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_ComputeHCI: {}
+ovn_metadata:
+  children:
+    overcloud_ovn_metadata: {}
+overcloud_ovn_metadata:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+snmp:
+  children:
+    overcloud_snmp: {}
+overcloud_snmp:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+swift_storage:
+  children:
+    overcloud_swift_storage: {}
+overcloud_swift_storage:
+  children:
+    overcloud_Controller: {}
+heat_api_cfn:
+  children:
+    overcloud_heat_api_cfn: {}
+overcloud_heat_api_cfn:
+  children:
+    overcloud_Controller: {}
+logrotate_crond:
+  children:
+    overcloud_logrotate_crond: {}
+overcloud_logrotate_crond:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+podman:
+  children:
+    overcloud_podman: {}
+overcloud_podman:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+cinder_scheduler:
+  children:
+    overcloud_cinder_scheduler: {}
+overcloud_cinder_scheduler:
+  children:
+    overcloud_Controller: {}
+ceph_mon:
+  children:
+    overcloud_ceph_mon: {}
+overcloud_ceph_mon:
+  children:
+    overcloud_Controller: {}
+nova_libvirt:
+  children:
+    overcloud_nova_libvirt: {}
+overcloud_nova_libvirt:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+keystone_public_api:
+  children:
+    overcloud_keystone_public_api: {}
+overcloud_keystone_public_api:
+  children:
+    overcloud_Controller: {}
+redis:
+  children:
+    overcloud_redis: {}
+overcloud_redis:
+  children:
+    overcloud_Controller: {}
+glance_api:
+  children:
+    overcloud_glance_api: {}
+overcloud_glance_api:
+  children:
+    overcloud_Controller: {}
+keystone_admin_api:
+  children:
+    overcloud_keystone_admin_api: {}
+overcloud_keystone_admin_api:
+  children:
+    overcloud_Controller: {}
+boot_params_service:
+  children:
+    overcloud_boot_params_service: {}
+overcloud_boot_params_service:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+placement:
+  children:
+    overcloud_placement: {}
+overcloud_placement:
+  children:
+    overcloud_Controller: {}
+iscsid:
+  children:
+    overcloud_iscsid: {}
+overcloud_iscsid:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+neutron_api:
+  children:
+    overcloud_neutron_api: {}
+overcloud_neutron_api:
+  children:
+    overcloud_Controller: {}
+octavia_deployment_config:
+  children:
+    overcloud_octavia_deployment_config: {}
+overcloud_octavia_deployment_config:
+  children:
+    overcloud_Controller: {}
+cinder_api:
+  children:
+    overcloud_cinder_api: {}
+overcloud_cinder_api:
+  children:
+    overcloud_Controller: {}
+timezone:
+  children:
+    overcloud_timezone: {}
+overcloud_timezone:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+octavia_worker:
+  children:
+    overcloud_octavia_worker: {}
+overcloud_octavia_worker:
+  children:
+    overcloud_Controller: {}
+ovn_controller:
+  children:
+    overcloud_ovn_controller: {}
+overcloud_ovn_controller:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+sshd:
+  children:
+    overcloud_sshd: {}
+overcloud_sshd:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+heat_api:
+  children:
+    overcloud_heat_api: {}
+overcloud_heat_api:
+  children:
+    overcloud_Controller: {}
+tuned:
+  children:
+    overcloud_tuned: {}
+overcloud_tuned:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+haproxy:
+  children:
+    overcloud_haproxy: {}
+overcloud_haproxy:
+  children:
+    overcloud_Controller: {}
+aide:
+  children:
+    overcloud_aide: {}
+overcloud_aide:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+    overcloud_Controller: {}
+cinder_volume:
+  children:
+    overcloud_cinder_volume: {}
+overcloud_cinder_volume:
+  children:
+    overcloud_Controller: {}
+ovn_dbs:
+  children:
+    overcloud_ovn_dbs: {}
+overcloud_ovn_dbs:
+  children:
+    overcloud_Controller: {}
+oslo_messaging_notify:
+  children:
+    overcloud_oslo_messaging_notify: {}
+overcloud_oslo_messaging_notify:
+  children:
+    overcloud_Controller: {}
+nova_compute:
+  children:
+    overcloud_nova_compute: {}
+overcloud_nova_compute:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+nova_conductor:
+  children:
+    overcloud_nova_conductor: {}
+overcloud_nova_conductor:
+  children:
+    overcloud_Controller: {}
+manila_api:
+  children:
+    overcloud_manila_api: {}
+overcloud_manila_api:
+  children:
+    overcloud_Controller: {}
+nova_scheduler:
+  children:
+    overcloud_nova_scheduler: {}
+overcloud_nova_scheduler:
+  children:
+    overcloud_Controller: {}
+ceph_mds:
+  children:
+    overcloud_ceph_mds: {}
+overcloud_ceph_mds:
+  children:
+    overcloud_Controller: {}
+manila_share:
+  children:
+    overcloud_manila_share: {}
+overcloud_manila_share:
+  children:
+    overcloud_Controller: {}
+horizon:
+  children:
+    overcloud_horizon: {}
+overcloud_horizon:
+  children:
+    overcloud_Controller: {}
+nova_migration_target:
+  children:
+    overcloud_nova_migration_target: {}
+overcloud_nova_migration_target:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+mgrs:
+  children:
+    overcloud_mgrs: {}
+overcloud_mgrs:
+  children:
+    overcloud_Controller: {}
+clients:
+  children:
+    overcloud_clients: {}
+overcloud_clients:
+  children:
+    overcloud_Compute: {}
+    overcloud_ComputeHCI: {}
+osds:
+  children:
+    overcloud_osds: {}
+overcloud_osds:
+  children:
+    overcloud_CephStorage: {}
+    overcloud_ComputeHCI: {}
+mons:
+  children:
+    overcloud_mons: {}
+overcloud_mons:
+  children:
+    overcloud_Controller: {}
+mdss:
+  children:
+    overcloud_mdss: {}
+overcloud_mdss:
+  children:
+    overcloud_Controller: {}

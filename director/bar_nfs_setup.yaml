@@ -1,0 +1,8 @@
+---
+# Playbook
+# Substitute <BACKUP_NODE> with the host name of your backup node.
+- become: true
+  hosts: backup
+  name: Setup NFS server for ReaR
+  roles:
+  - role: backup-and-restore

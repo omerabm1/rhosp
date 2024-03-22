@@ -1,0 +1,42 @@
+parameter_defaults:
+  # SK:20180527: Ensure to use same CA cert in PEM format as used in undercloud.
+  # If there is mismatch the deployment will
+  # fail with at WorkflowTasks_Step2_Execution stage.
+  #
+  SSLRootCertificate: |
+    -----BEGIN CERTIFICATE-----
+    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
+    1QslrOop8cZPco3tJPoWFcGXjoxCg6E=
+    -----END CERTIFICATE-----
+
+resource_registry:
+  OS::TripleO::NodeTLSCAData: /usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/tls/ca-inject.yaml

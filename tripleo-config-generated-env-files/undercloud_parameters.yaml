@@ -1,0 +1,202 @@
+parameter_defaults:
+  CertmongerCA: local
+  ChronyAclRules:
+  - allow 172.25.249.0/24
+  CloudName: 172.25.249.201
+  ContainerCli: podman
+  ContainerHealthcheckDisabled: false
+  ContainerImagePrepareDebug: false
+  ControlPlaneStaticRoutes: []
+  ControlVirtualInterface: br-ctlplane
+  Debug: false
+  DeploymentUser: stack
+  DockerInsecureRegistryAddress:
+  - director.ctlplane.overcloud.example.com
+  - 172.25.249.200
+  - 172.25.249.202
+  DockerNetworkOptions: --bip=172.31.0.1/24
+  EnablePaunch: true
+  EnableValidations: true
+  InternalTLSCAFile: ''
+  IronicAutomatedClean: false
+  IronicDefaultNetworkInterface: flat
+  IronicEnabledBiosInterfaces:
+  - ilo
+  - no-bios
+  - redfish
+  IronicEnabledBootInterfaces:
+  - ilo-pxe
+  - ipxe
+  - pxe
+  IronicEnabledDeployInterfaces:
+  - ansible
+  - direct
+  - iscsi
+  IronicEnabledHardwareTypes:
+  - idrac
+  - ilo
+  - ipmi
+  - redfish
+  IronicEnabledInspectInterfaces:
+  - idrac
+  - ilo
+  - inspector
+  - no-inspect
+  - redfish
+  IronicEnabledManagementInterfaces:
+  - fake
+  - idrac
+  - ilo
+  - ipmitool
+  - noop
+  - redfish
+  IronicEnabledNetworkInterfaces:
+  - flat
+  IronicEnabledPowerInterfaces:
+  - fake
+  - idrac
+  - ilo
+  - ipmitool
+  - redfish
+  IronicEnabledRaidInterfaces:
+  - idrac
+  - no-raid
+  IronicEnabledVendorInterfaces:
+  - idrac
+  - ipmitool
+  - no-vendor
+  IronicIPXEEnabled: true
+  IronicInspectorCollectors: default,extra-hardware,numa-topology,logs
+  IronicInspectorIPXEEnabled: true
+  IronicInspectorInterface: br-ctlplane
+  IronicInspectorKernelArgs: ipa-inspection-dhcp-all-interfaces=1 ipa-collect-lldp=1
+  IronicInspectorSubnets:
+  - gateway: 172.25.249.200
+    host_routes: []
+    ip_range: 172.25.249.150,172.25.249.180
+    mtu: 1500
+    netmask: 255.255.255.0
+    tag: ctlplane-subnet
+  LocalContainerRegistry: director.ctlplane.overcloud.example.com
+  MasqueradeNetworks:
+    172.25.249.0/24:
+    - 172.25.249.0/24
+  NeutronDnsDomain: overcloud.example.com
+  NeutronPublicInterface: eth1
+  NovaSchedulerMaxAttempts: 30
+  NtpServer:
+  - 172.25.254.254
+  PublicVirtualInterface: br-ctlplane
+  PythonInterpreter: /usr/bin/python3
+  SELinuxMode: enforcing
+  SSLCertificate: !!binary |
+    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZmRENDQTJTZ0F3SUJBZ0lDRUFBd0RRWUpL
+    b1pJaHZjTkFRRUxCUUF3YVRFTE1Ba0dBMVVFQmhNQ1ZWTXgKRnpBVkJnTlZCQWdNRGs1dmNuUm9J
+    RU5oY205c2FXNWhNUkF3RGdZRFZRUUhEQWRTWVd4bGFXZG9NUXd3Q2dZRApWUVFLREFOSFRGTXhJ
+    VEFmQmdOVkJBTU1HR1JwY21WamRHOXlMbXhoWWk1bGVHRnRjR3hsTG1OdmJUQWVGdzB5Ck1ERXdN
+    akl3T0RVNU1ESmFGdzAwTURFd01UY3dPRFU1TURKYU1Ca3hGekFWQmdOVkJBTU1EakUzTWk0eU5T
+    NHkKTkRrdU1qQXhNSUlDSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQWc4QU1JSUNDZ0tDQWdFQXdx
+    M1IwSSt5ZWE0awpNSEw3QUZKMzl5MWRSanQwbHdkNzZqRVRQNHFraHRPL3R4TXU1YWoxVTFKNk5Z
+    RUJTRlNlZXY1L25oR2w5ejNHCm9WQndNUFYzV3RHYTh1bW5ESmtBRWtmREhSckRiQkZZbUd1ZTU5
+    WUw3RHhLMTZrRjExMFk3M2tIQ1MxWGVzQ08KdFI4RUNsbjJyN3JZamREMjV0ckNOL3RhSFgvRFB5
+    dVUrYXNOdWU4Q252U1BORVZKRVBrdkxhbmZ2cmlKamRPeApvaWxxQkNRTWdIdDc4U3gvN2Y3K2No
+    WjE3T2dCKzQvdmVRdkJQb2QzQzRUWDhqdjR1M2MvUjgwa2ZVQ3EvN3NyCmhhRUtxSlVZSlRzMmJ2
+    cWFpWGhoZ0MvYk0yTkNsR1hmamg1ZFZNandQYVJMN2Z1WlZlRFlCdzJ2Q1BpT3ljRW0KYVhXdWZB
+    bWJIdHJaWmI5UWl1UTZGNWxjOEVJYS9JcGg4NUJvd0VXNU5EYjI3RmpuUWdIK0IvY2xpWHdQblRO
+    RwpWSjdVQTY2SDI3MkhwTTB6MytIWTU1aTd4cjN5d1gyRVIzNnNWN0s5dkIyT2IwU0NrVk1hUlJk
+    dWltVDhGSG1iCkx1b0Z0ZGtRcDEra3FFRVNtV1N5OWhtTnR5d2IzT2hkK1RWdHNqeEU1U0FLZlI3
+    MDlhV1RuQVJjbGlPQWZwTnAKbEh0R0VFQmJpNWE3RnphdkdaczgwZVVWVnFzVjQ1a2s4VzBGRjAz
+    NXF4c1MxMjVFVmc4ZisybzR3NUFmVnM3SgppWVpBa1p0WW9IUkZkbU9VWnhva1FRUGRuUHpQWmNL
+    bGJIZHAyaEt3K3E0UkNGS3Q3Nk5yOFQ0ZEN5bHMvYVBwCnZhRVptSW1NM0grckhSQ0haTld2R0Jj
+    NHJVOEVrUE1DQXdFQUFhTitNSHd3Q1FZRFZSMFRCQUl3QURBTEJnTlYKSFE4RUJBTUNCZUF3SFFZ
+    RFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01FTUdBMVVkRVFROApNRHFIQkt3
+    WitjbUNHR1JwY21WamRHOXlMbXhoWWk1bGVHRnRjR3hsTG1OdmJZSUlaR2x5WldOMGIzS0NEakUz
+    Ck1pNHlOUzR5TkRrdU1qQXhNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUNBUUNRWHhMWTlXaXFNQ0ha
+    OEFxZmpReDEKL2dMT3ZCZkxYbXdGMUpvNDFab1g3MzFSQ0drSk1lWncrM0p6R3VsRXZ1Q24yQlls
+    NVFNL3NFK2tPSmgraDBFegpZUWZWZ1Z4SXRSVDJneHVpeUJSZjhpS0dDQ1dRaW5Tc3ZUV1p6bEFG
+    RDljTFo4aGxibWFwQWJlc05pbk0wU0twCnVJazQ0WTlnWTZIWGF0OWlHWHAwVXJrZHFwTTNPakRY
+    c0xMV0x3NG8yNVNpRGVKanRWU2t1NFJDVmNRb2EvVUoKMlRLN3lWS2F4NmtXcm9xRTlYUnZnQWdv
+    M2FySmxlaDBuTU8xN25Ea2F4VzJzVkoySmdEa0xGdGRBOFFYZ2NySgo3dGZiM1o4U1RJbisvd3Ry
+    RlJaWmxYQmNuMFNSRzBqTS9LbFZIa1VNUmlDT0tyOUlvY0xEY3pKZ1RNMUxZTVMvClVkRTQrdDhW
+    UU5SNkI2a0ZtNzNBcEZpVGdLc0VIRWtGem9VOHBzWlM3V0VocUF1cFBsTlJ3alFCYmo1YlNrS0oK
+    M09oMTN1NGFJcXhxMkcwRWtuSzhId1BMbW9kckNTLzA1QWZjUDc0d0JSLzlUa0xGZWcxeEhQcUxR
+    ZzdrN3lETQozby9CSzVxS044ZERpTXNWMVZja00veTl2V2ZiNVVFV1QvWnMvc0k0NUovcWxwbDRJ
+    R3k1TXF4Yyt6NVdqbHpTCmM2a2JyTlljVm0za0xubS9wYVJsRGpweEVjYVNodXBRZnRtWUQ4L3kr
+    bE1rMVlmS2dzamkwL0tSVHgvWm5RWTYKTDc3YlJUOHdlYytuYms2Ujl4bW90V2pkWlp3eEdWRFFU
+    L2tLVlJzdkNsSE5mKzNLaHRQNzVUYURTSmg1UnBYUwo2ZFpoYXB5Y1Y5R2xCM05jYjZkU3JnPT0K
+    LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  SSLKey: !!binary |
+    LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlKS2dJQkFBS0NBZ0VBd3EzUjBJK3ll
+    YTRrTUhMN0FGSjM5eTFkUmp0MGx3ZDc2akVUUDRxa2h0Ty90eE11CjVhajFVMUo2TllFQlNGU2Vl
+    djUvbmhHbDl6M0dvVkJ3TVBWM1d0R2E4dW1uREprQUVrZkRIUnJEYkJGWW1HdWUKNTlZTDdEeEsx
+    NmtGMTEwWTcza0hDUzFYZXNDT3RSOEVDbG4ycjdyWWpkRDI1dHJDTi90YUhYL0RQeXVVK2FzTgp1
+    ZThDbnZTUE5FVkpFUGt2TGFuZnZyaUpqZE94b2lscUJDUU1nSHQ3OFN4LzdmNytjaFoxN09nQis0
+    L3ZlUXZCClBvZDNDNFRYOGp2NHUzYy9SODBrZlVDcS83c3JoYUVLcUpVWUpUczJidnFhaVhoaGdD
+    L2JNMk5DbEdYZmpoNWQKVk1qd1BhUkw3ZnVaVmVEWUJ3MnZDUGlPeWNFbWFYV3VmQW1iSHRyWlpi
+    OVFpdVE2RjVsYzhFSWEvSXBoODVCbwp3RVc1TkRiMjdGam5RZ0grQi9jbGlYd1BuVE5HVko3VUE2
+    NkgyNzJIcE0wejMrSFk1NWk3eHIzeXdYMkVSMzZzClY3Szl2QjJPYjBTQ2tWTWFSUmR1aW1UOEZI
+    bWJMdW9GdGRrUXAxK2txRUVTbVdTeTlobU50eXdiM09oZCtUVnQKc2p4RTVTQUtmUjcwOWFXVG5B
+    UmNsaU9BZnBOcGxIdEdFRUJiaTVhN0Z6YXZHWnM4MGVVVlZxc1Y0NWtrOFcwRgpGMDM1cXhzUzEy
+    NUVWZzhmKzJvNHc1QWZWczdKaVlaQWtadFlvSFJGZG1PVVp4b2tRUVBkblB6UFpjS2xiSGRwCjJo
+    S3crcTRSQ0ZLdDc2TnI4VDRkQ3lscy9hUHB2YUVabUltTTNIK3JIUkNIWk5XdkdCYzRyVThFa1BN
+    Q0F3RUEKQVFLQ0FnRUFzeHVHS0pLOENoVDcrSk1nZUlobkZNTG95TC9Vb1VyaVozRWxHMVdyenR1
+    cnkzeGJyakdIRzFTTApXUVJLTU1paFVka3BnajBNYTI2cmV5aHRQNjNtVkdqNVhMazQxbTlCVUpB
+    elkyaUhHTHJRdnRKc3pURHhvVE5MClRDU1dXakN0eTB5Vys0dDZxMVhUTmJIR1h0dXNDTHNubHpv
+    RW5obnZpOSsxWmVSd3RvS2JPaVIwcVhiSys0RlcKNnlrL2N0MCsyWTByYStXTnNDMXVoUm9ERHJJ
+    M3lsRlJrMjUwZUhzY2o4dzRUSENidWwwUFhsZEJRQTBUcWtaYgpBdUxJRVhsQmdBYXRwb3JEaUNv
+    a2ZYblBPNUNJT1dERDBOREJNdTdORFVsNkswb01MRW1acHNBcTcrRTZuZ3UxClM4c3BwSWdMV0Zu
+    dmlwcGJqQ1VtK09tclVUVHBQNXdHaXJ3S0hpNGpPTXFHTWlHWlh6MWQ1MnhOMUpJRnFNd0IKbk13
+    R0lTZDZTOWsyTmN0cnVEbmpuTmNxN09jRkV6bmR6RjErUjlvWi9UK3hQVEFEamxNRHdHdkhDTy94
+    YWtESAphMHNoc21SZUZZSmFBWHovelY0dm12cDBBVlNsWEh6Y000MEwxVGFRS0JzREJpV3F6Sm1V
+    K01ObFhnWE1xZjBoCkFCeUo4cVArMjNQWUFUQjN6RG8wbElvdU1HWU9LVEY5ZDBVUFBnU0E5YVhz
+    ZFl6cHhrY1hZeUxVVkxDWlp6M1EKSUZsbVkwdEVraTR5L2swTUM5a2RML0F5OEJuSGNSRTVWN3gv
+    cUFLay9NYmVJRkdQUGVlVTB6YVFBRWhubHEvMgppY05PbVNUUk9aY2Nob1lIV1FWMHlQd3d6WDdr
+    WGZvMzFrVFFNV3JlUFE2NkFCUFJVVmtDZ2dFQkFPU0dxbEZzCnpRTlZ5WWhBOUlRRHZLM2xwNVN1
+    dGxwNFFVN3JmT0dZYjVxQmcvbElLUHdMemxjaW8wR0g2cVNYV0V3VnZKNnIKUFdiQno5aFZWL1Br
+    ODN1d0RrMittSUVIVVl6L0VPMEhVTVFyMjR5NmlwbVV4VEg5c1NHS2QxUnVrQUpjcUlCegpUVEpw
+    dDVwb2pWUWNEZnZOVkVVcVBva3RJeG1BUWExWnY5U0RTZTg5OFJuVXhnQzRHcXc0K0JxL0RXTE5H
+    ekFNCk9PUEkwaGZmcDloQzk4RDREMVhyTFRwQ0lqSU1kOVlzUjRCS25Na2NObk83ck53STRPVldk
+    cDF3ODNUSkEwNWgKd0NTazlaTmZVY0IrRHVOTXVrcHlmNnVQSkFJK2cwSTdHbE50RUoyNVVlUkx0
+    RVgrR3FjS1hPWE1CR2UvYXJ5ZApBMEFnNDIxQktUSCtnLzhDZ2dFQkFOb1ZjZlk4UDZENFAydUFs
+    Sk11UXlnNHFwOEJqQUdpOUluSlR0d2pJL05aCmJtVTVXNVhDZDRFaHJuVCtkNnRVcEJLQ1NsMU5l
+    T3oyaDhMYUpOSi8rUDAycCs2T2Vnd2RWVnNyckR1UXZ4UVIKblZueVRvN21XTEZWNU5RSHNSRVpG
+    bVpQSW13cDBNUHRqSmE2NEx5ZE56UU90bzZYdmV0bjlBempNWGp0QUJsaApWU3FNN3VkdjRMck4x
+    OURkZ1VubHovL2ZtTFRGWGJTT3ZpbURRNlU3TVY2dDNvMTFqSkJTY0Y1Z2c5OUdtYnlJCkVJcXVK
+    bWV2Mi9uSnBxeUNvREFQL1g3UTBFZFNieHZLUUptOHhBTkNxZmFkVTJxYkVDSTlrbG1NK1pIR0dx
+    TFIKRTR5UzdoS1ZuTkdaRGRvYU1tb3p3Y3ZhbDZ5WWJxUEdydjFWTGRiMEl3MENnZ0VCQUt2ZW4r
+    K1hQV1Q1dXhWUApqTlpRblRISUc4NFZ6QzJrYmJHMkovamZGV2lGYWNVc3dTNDJqdHczdjhMRVB2
+    UEVvM0t0a210ZTdGSUJCNWx6CkxpL1BERlFFNSswT29GSENPRklyYndabFR4Z0t5QmRDSUlVN1Aw
+    Zkd2ZFkwOW1RNHR2UWZ6ZGExWU9TK1g0aXcKZzBJenkweUtjNHVGSnYweVJraWlqa0thMGt3NDVY
+    MFovOTltaC9mNGZvN3lWWjUvKzhoSDY5K3FBWXRHK01OZAp3VFZEd0dPUDdMQzRyQTQ1dU5BZFVt
+    OXdZK0lYdTIwQlcrNlV3bi9GNmFaeDdjbWhMbWl4MlZ1MDVyWm9uZzFWClRmM1FrTS9nWCtjbno5
+    OHVTMjJvcUQxQ2lCMGdWTFBhc2IxYU5sM0JxemZmOGxnZHBWNkZ0dmZkdXBrYll4QkQKUm9GRUl1
+    OENnZ0VBVUk4VmJ1RW9tL3kzNksweHRRQ2szQ202bFV3TC9OckdQRk81cHNYd1ZNZFhhVnI3d3VG
+    NApKYUpjZ0drenFYMTFza1NnMWNCMWlBczFjVHdGMkNCZnlLRzAvUUZ5Z2lFZjA3TFpSNU9ia2Yx
+    RHcrTW5NOUJSCk9RakNvN1JIcTBvNkpRYmNiMW91L1FFMktzUFRtcmowbUcxSzhIZUxOM2RLQnF5
+    eUxMcFhqQWlSWGt0N1FORHEKRWZkUjNwekVVcGpxOGRrVjNzajlhV0pGU3E1cmdaRFJGdWxoU1oz
+    L2s1eHdWOXlOT2lBcFVDUnUvOXQrNGxScgpET1Y1aFVZbmlEbVA2WldYS3BGLzY2TVZvL1MvNzNo
+    anNtN0JUcU1ESGJMaTZlT1NtVSsxclNsUWNHQWlRNGt5CnlaWWhNTXoyakphYjR3TFhmbkU4aFpF
+    eU9QQ0xJMWxCelFLQ0FRRUFyWDVYVE5iOHRtZURPNTR6a01mVjQ0NnYKZzA0OVdxNjRQNjdaN2N3
+    amxzeWZrdEh1cDlRZlZKWEpOWHdSN1l0T1RzbFFjb0RiaTVBdmFqRUZBNmhscXZQNgpRWUZsVHRh
+    eG9UdUdwY1JxSXFPVnU5UmI0OWdtOXVwanBwclNMbmpBbEFTcGkrUmJ4Y2dPWHc0UnpJc0p0c05Q
+    CkdDNW1GVlc2SUpFU1EwbmZkZXoyNlg5MTV0VEw4djVuQmpuQlVjaHg0NGg0emR1bEoyL0lCYzhK
+    Q29aSWZzaU4KV2FoR1NFdis4blB4eW5jaWU1NDlWZUkzU09POHFFWHVzQlcxcmpqS3htYmlEWmxz
+    YnhWclBzeUNETHl4a1lNZQo0cjBzUDNoT2gzZVNGanJiQnRrN3pVcm9JcDhBWW5IZkFxODVTUmZ4
+    eVJ5N29oMzh0d2JWMnFTSnBJYk9CUT09Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  TimeZone: America/New_York
+  UndercloudConfigFilePath: /home/stack/undercloud.conf
+  UndercloudCtlplaneIPv6AddressMode: dhcpv6-stateless
+  UndercloudCtlplaneLocalSubnet: ctlplane-subnet
+  UndercloudCtlplaneSubnets:
+    ctlplane-subnet:
+      AllocationPools:
+      - end: 172.25.249.59
+        start: 172.25.249.51
+      DnsNameServers: []
+      HostRoutes: []
+      NetworkCidr: 172.25.249.0/24
+      NetworkGateway: 172.25.249.200
+  UndercloudEnableRoutedNetworks: false
+  UndercloudHomeDir: /home/stack
+  UndercloudLocalMtu: 1500
+  UpgradeRemoveUnusedPackages: false

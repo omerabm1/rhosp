@@ -1,0 +1,7 @@
+# Playbook
+# Install and configuring ReaR on the control plane nodes
+- become: true
+  hosts: Controller
+  name: Install ReaR
+  roles:
+  - role: backup-and-restore

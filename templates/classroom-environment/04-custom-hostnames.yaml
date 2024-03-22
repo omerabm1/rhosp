@@ -1,0 +1,8 @@
+parameter_defaults:
+  ControllerHostnameFormat: 'controller%index%'
+  ComputeHostnameFormat: 'compute%index%'
+  ComputeHCIHostnameFormat: 'computehci%index%'
+  CephStorageHostnameFormat: 'ceph%index%'
+  # BlockStorageHostnameFormat: '%stackname%-blockstorage-%index%'
+  # ObjectStorageHostnameFormat: '%stackname%-objectstorage-%index%'
+

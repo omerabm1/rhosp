@@ -1,0 +1,7 @@
+# Playbook
+# Using ReaR on the undercloud node.
+- become: true
+  hosts: undercloud
+  name: Create the recovery images for the undercloud
+  roles:
+  - role: backup-and-restore

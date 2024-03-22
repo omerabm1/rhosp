@@ -1,0 +1,3 @@
+resource_registry:
+  OS::TripleO::Services::CephMds: /usr/share/openstack-tripleo-heat-templates/deployment/ceph-ansible/ceph-mds.yaml
+

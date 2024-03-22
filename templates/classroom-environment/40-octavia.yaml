@@ -1,0 +1,132 @@
+resource_registry:
+  OS::TripleO::Services::OctaviaApi: /usr/share/openstack-tripleo-heat-templates/deployment/octavia/octavia-api-container-puppet.yaml
+  OS::TripleO::Services::OctaviaHousekeeping: /usr/share/openstack-tripleo-heat-templates/deployment/octavia/octavia-housekeeping-container-puppet.yaml
+  OS::TripleO::Services::OctaviaHealthManager: /usr/share/openstack-tripleo-heat-templates/deployment/octavia/octavia-health-manager-container-puppet.yaml
+  OS::TripleO::Services::OctaviaWorker: /usr/share/openstack-tripleo-heat-templates/deployment/octavia/octavia-worker-container-puppet.yaml
+  OS::TripleO::Services::OctaviaDeploymentConfig: /usr/share/openstack-tripleo-heat-templates/deployment/octavia/octavia-deployment-config.yaml
+
+parameter_defaults:
+    NeutronServicePlugins: "qos,router,trunk"
+    NeutronEnableForceMetadata: true
+
+    # This flag enables internal generation of certificates for communication
+    # with amphorae. Use OctaviaCaCert, OctaviaCaKey, OctaviaCaKeyPassphrase
+    # and OctaviaClient cert to configure secure production environments.
+    OctaviaGenerateCerts: false
+
+    OctaviaCaKeyPassphrase:
+      cc9609e1b83d42d5855275e2b9e8fb51 # Must be 32 characters
+
+    OctaviaServerCertsKeyPassphrase:
+      cc9609e1b83d42d5855275e2b9e8fb51 #Must be 32 characters
+
+    OctaviaClientCert: |
+      -----BEGIN CERTIFICATE-----
+      MIIDKjCCAhICAQEwDQYJKoZIhvcNAQELBQAwZDELMAkGA1UEBhMCVVMxFzAVBgNV
+      BAgMDk5vcnRoIENhcm9saW5hMRAwDgYDVQQHDAdSYWxlaWdoMRAwDgYDVQQKDAdS
+      ZWQgSGF0MRgwFgYDVQQDDA93d3cuZXhhbXBsZS5jb20wHhcNMjIwMTIxMTM0MzEw
+      WhcNMzIwMTE5MTM0MzEwWjBSMQswCQYDVQQGEwJVUzEXMBUGA1UECAwOTm9ydGgg
+      Q2Fyb2xpbmExEDAOBgNVBAoMB1JlZCBIYXQxGDAWBgNVBAMMD3d3dy5leGFtcGxl
+      LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALRzSm+XCKM9AukN
+      YH91kfgWeFs/DXVTqYxaRG2VM25M73//yQba0hY2kl9LW2fLdcwcHZgJn29ajiNS
+      r3G/dYQe9TFlQnwFQsvLWuNci3hNdiJvyRMBMs295URdATTylAivBJdZUecp3Ne0
+      LU/22g+YVHLMfcXvpWigCIIufWS5qgsGFeV9PbVol4nZTRsXNlWkgTBT1gjARqw0
+      xG++9zFxwzfrLxhMZ84JBjADB6noqgjXCHiQd9+21iMFHomnjlK52cH1yVp+P8Od
+      olunYgexd8fF1PMTD+Ii0UQnSbmN/Fes/ypzaTHVfRdTVS99NfCULxwoZkcUqNsG
+      73Ly8akCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAAHd5AA8DOZ8Fbp/mi5VTMXd+
+      2SEkxCz5Q7+n3lEpj0p1JfnkwdaB5MtNXqZEdVY8zyd0LPbJn8pIDNBvYVuwxIoP
+      EXgYKCBnS7auK9o445/5wPtn518I4gsEm8H445fDGPp6CH1qb0ysLIFNRtCg0sT4
+      EM8DcbYLVrRiONpPmEEEz2XdLRfm56NUAOZekgY4bj26avzxuEXohtrWTADj+UAa
+      iWWabH+S+Oxoek8uuL6HnSGdFPb8DOEgrMF/oPd2RCWZaDPb+YI3hqfF1utC2Aqi
+      RyUIaULwYTgMaeVdjqbGuEtIAnwDJJkjdI/mVt5AdtH4gXEE9bHsISUi714ePw==
+      -----END CERTIFICATE-----
+      -----BEGIN PRIVATE KEY-----
+      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0c0pvlwijPQLp
+      DWB/dZH4FnhbPw11U6mMWkRtlTNuTO9//8kG2tIWNpJfS1tny3XMHB2YCZ9vWo4j
+      Uq9xv3WEHvUxZUJ8BULLy1rjXIt4TXYib8kTATLNveVEXQE08pQIrwSXWVHnKdzX
+      tC1P9toPmFRyzH3F76VooAiCLn1kuaoLBhXlfT21aJeJ2U0bFzZVpIEwU9YIwEas
+      NMRvvvcxccM36y8YTGfOCQYwAwep6KoI1wh4kHffttYjBR6Jp45SudnB9clafj/D
+      naJbp2IHsXfHxdTzEw/iItFEJ0m5jfxXrP8qc2kx1X0XU1UvfTXwlC8cKGZHFKjb
+      Bu9y8vGpAgMBAAECggEBAJoWIKetFokdnhCXhaERKfXoahmwe7OGHy9kHS5dyy8S
+      ryhjqKsby22AZ/jLhl/ZUttZ3sNm5CfX8auj/YBp9tU9Ai6NwvnYHDOdkBy5d7bg
+      nlHFlrONwG4DC3UW3eLyiQnpOUhr0w5LpvLiPhccORQ8BVCJ4ZRVkK8IiHtxa03H
+      9AMQmbUSPpWE2T02G3GJDUkTIc/GbWt+D1KE+NYSIapXUrJCRc/dq1gyRawGZiyb
+      f0oNXIGXMtx+FHPLSxdeEcm4mkoiKUbGPpv1kHX8Ipr/8Fp7Few8TS+iQ0XGVNAX
+      2RdsBHeamNV2muE0FXuE6Dt8kRrpydc6FlvT+tZ3FIkCgYEA7DABafEUcFBTTaKD
+      /80mf2sIBQdltOk0t/F8VwYOK/hKn5dWcX5pS9PEEQJF6ycmLPr6yNaFQYevq06f
+      sB70Fkvn3Rvq06wnvemlL2L6Crmt3n5fGxf+jNPSo4cdd1SJyH9ppVoScEyw2GBJ
+      fvVJwFZRHQAe+60Srnw0I2hrjr8CgYEAw5ZcYVh5EikKWiJBlS5frgXh+izKPcTx
+      v7X4gFG3Mwtwi+kE1avzJF4wJOrJGIIOht+GyNr/gjDm/FgGZVswJaPobfTXdllk
+      GwYv6KhrNXm3dpUYFCtYBomUwYOTLJDbEBpLxLtQEmlb3Zh55DV8yk/eBpfdhAgG
+      i5gKRh/NAZcCgYEA26rWVcsjwEXlBGqnLA2Ixa8tOUgk/vp6zq2pgGKgYaK+/OlL
+      O6lfk2e0jkE3+DpkFiejgZGLRGRHLSOl/676Q5Z7YrkpUY9nMwmQWZ9LgRgqrqmI
+      GPHbDO2hlff/ntGgiDqAbop0Zb/eJpB/KrZFzr45GKjZKChTHLdl4pymlI8CgYAQ
+      rT1rP3PzTHSJguo8ohueZvoBrtf/tE84nXd22YDZZVxPUasL3QF6VF2eiDZlVJGQ
+      hnajoaivnSPU2FyTP9c3HmavGXVVrgGPHFPxborVoG84OTY4Ygm7ZPe+GE3wOtmy
+      4cscFyyYpUsj9eBOyRC+31h7D2/f1h9Yv7oAiK2eOQKBgGk6hTJQxlvenSIJz4qd
+      VusDN4mk7OTIGuEU4sdglXd/uOwpYQL3h9EiDuGR6OfT5oqQ5OclOlcUzQDutsdX
+      fYnOrYhhbWqAk/lPxIIgp2t9Ngvss/q9rHMJc+kBy4FH7ChcvO/egsmFga52ICgm
+      AiC9TOjvw+WYfRmINl+RgHlZ
+      -----END PRIVATE KEY-----
+
+    OctaviaCaCert: |
+      -----BEGIN CERTIFICATE-----
+      MIIDuTCCAqGgAwIBAgIUdgHQSVn9Ba3TeaMb7Tv+x3X5V60wDQYJKoZIhvcNAQEL
+      BQAwZDELMAkGA1UEBhMCVVMxFzAVBgNVBAgMDk5vcnRoIENhcm9saW5hMRAwDgYD
+      VQQHDAdSYWxlaWdoMRAwDgYDVQQKDAdSZWQgSGF0MRgwFgYDVQQDDA93d3cuZXhh
+      bXBsZS5jb20wHhcNMjIwMTIxMTM0MjQzWhcNMzIwMTE5MTM0MjQzWjBkMQswCQYD
+      VQQGEwJVUzEXMBUGA1UECAwOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcMB1JhbGVp
+      Z2gxEDAOBgNVBAoMB1JlZCBIYXQxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbTCC
+      ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKb5COqU/yNZAjROgo5KQSfM
+      1+coNFrf6IhQat0vbJ2R2WfYiuE1H1Xa1uWSjeBD2id0dDElG8apopVM3CK6Wkzb
+      nCE1WZ9+Tfpxfgr0uTM4gJkMGIoxZfHOLbfNCeeTTVNF+G34r5SXAOkBJZkjqfCF
+      W2mtA5wkz4gKLftCrb3p7xQIokDsH5NZaJ72ZnO2rN5qMy8zCrnvgkI+1dLOfir0
+      m6HdpRK0OuK0am8WqR1oJHMbx5Sg3ggonusJKtsGLe/L7UMhgTZIsyS9VmTyZbNo
+      /7Bzr/1bH7lYKFYr4zbBbSfaFL/TS4Dvli/Jd57/+vf+pegx2SMEA7YxMAHC8TkC
+      AwEAAaNjMGEwHQYDVR0OBBYEFBLrV5pb/cAB9HYQixt9B3tHuSMWMB8GA1UdIwQY
+      MBaAFBLrV5pb/cAB9HYQixt9B3tHuSMWMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0P
+      AQH/BAQDAgGGMA0GCSqGSIb3DQEBCwUAA4IBAQAD+8w6pCuWr3k4IByYOXVYX+qm
+      J9wuu5kkolGD2pjm9AU2wK6BaUPvZpjDcEXK8tJfmcMra6zGs0e7MT6xrTtSeZhr
+      cfOUozNw5/64/QFu7aDmnKUty7sowhu3o5doN+6HUDCgATknIVqkgvR+DOiPm148
+      29BThEK14b/tb6l+PnmMRnDZj9tyQTPTJFVRG5nVkQ5gm5eIvwNmUKrjhoEiKwiu
+      +P+tcPDxpwzp+RK8QPibeBZEQzTZjDDxTqoolgMfoPWZbM7meD5lc5uC0ar4tTK3
+      zM83BCVXhRmTsSUanaaUnSmYIltyB9FU+et2LW5M34pB6MJM4skBcFkaCqTn
+      -----END CERTIFICATE-----
+
+    OctaviaCaKey: |
+      -----BEGIN RSA PRIVATE KEY-----
+      Proc-Type: 4,ENCRYPTED
+      DEK-Info: DES-EDE3-CBC,56C1BD0EDE6AA216
+      
+      VtZ+huTFcbUJ7OBP8hgAdkJmZxa+4zHLMyTxYyeHpiI3FN7AyrfRDX9/Yga7nWek
+      TVe6n1hlB8hl861lXcQsQR+u4XL3NgchPjFgSPdwObtTu02J88eYqyGtxIuGxmCY
+      7xtzdRkGFR/IYb9fnecE17fiPZUiokFWMVTEStxsRYTZKjFb0AOgu3bPITbFPe77
+      vCgiOwXCmoZQp5k0Hp6bcp11NxksHtacfMClr/kthPO1M/+VE/hAajESdB1fMDgP
+      CfjntC+z/D0BxcpCrADWOP5vRJjdgY0uUNukqfff7yEVhCnphHXK0ssOTEAbURDf
+      8wavN8mmWVh1211f8YM1Me9Ogo5FDP/G1CEWmEeGrr2Iltf0AgtjFWhC1R1JrOn0
+      dncISGVQyfUevLVisBz2k2pfJsijuaOMKvUVfl5V6ODAd0T6eUc3SZSKXBc4N7pP
+      Wn2ZWa/GFiYqlQotkY7yWTycq1KMMaGL5vspMHECuFIHudoYXOnLkTNWXusSeE14
+      VbWCdGJSkbyCnN6h1Ct0PBpYhrsgdGckHHAiszBF8hvdPdVNrVwnqy0q3g/oRrSL
+      GsBnsWY0jhmCUn3+g4MS9+mm/azYGjUAPlEZXjk8l+L1pXd8EmqDtogonfp3QFvn
+      WGaIGcL3/Tim8HQWGbfNnRRNO7Eeka9QGhe1A/+qz45Mv32pJxaGQnlXSkhSHWrH
+      aGbDm+njxtmbJdnndS6ac6+SQm0Rz/lmpxqzzpr9Hv61blbJquz3V0yIlIPpPOPh
+      emwSLf4XP9dql7+AYVMTBGXUxtgDeDEFleBUNBp0jKzYTtWqFIDH8SJ6F42YzjIh
+      H/zceol9/qN57icU8TuhUhiEy18sivlcJBb7pb7W5Eja7PArVfWga/D1sHbMi3yK
+      Fo0YE02xHQ3ueTGC5QTOwaAp/A6+xW2d5A3LOwiYSm+Qe7W7QSaDyKR8mrwQFrfw
+      AZ4i4Tqb7SkgBUx/cDAnbVHT5MdpjdqE/A5+56n1dAyRcoSUG7Ljp68oCWaTjpSA
+      07LwjCXocV4WSg1lmej0sJgTqywbIjZXQT+IL4azziUl2cbhpvY+rMSrVWpFhi44
+      yRZIjbGKh3woQPWF9qK4BFb48hOTcqxZJk8ZGBY92jvKRjXF3UiCVHdjuJly/qyD
+      XmitXbAYMORRJpW4OIJupBoQ/UTQEw8h1nKykUAju2r4PAyMlbudxeoQ0uWsNNIb
+      2hJUmwQ/1wpyvHV/KVqPTRSymEzwPpYdvUK7Vld4qw5hK0d20KPthYejquLujT9q
+      0+lTaeQ4GdAmtCyRoHG4DKOcKM0NAXTHrHL/+qi4Sinm0HG4smV47V+FfShJS4zl
+      SM5vCG76omItvUL3GX86lSQ1adrILrVEtkGS1VAIJXAsUAEFu7+ihmD141TH0xHc
+      Q8B0fyeyxXWqncDZY5NL2jjP0o2ud43AEk6uCuZBfbGCADpvjmuzohROEr1lvBKM
+      w/MD7LUPVuxGRsfbFiGSKK/WayUybADoT7zu74oKcZRdZNqJQgRkWAclhJeeDlNW
+      /hNi6+GwV83oUbPbefQHFut5orBib6BNKJO+BOvh/3QNR8/a93JxFQ==
+      -----END RSA PRIVATE KEY-----
+
+    # override management network defaults to avoid conflict
+    OctaviaControlSubnetCidr: '172.23.0.0/16'
+    OctaviaControlSubnetGateway: '172.23.0.1'
+    OctaviaControlSubnetPoolStart: '172.23.0.2'
+    OctaviaControlSubnetPoolEnd: '172.23.255.254'

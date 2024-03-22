@@ -1,0 +1,31 @@
+parameter_defaults:
+
+  # These scheduler hints replace tagging nodes and flavors with matching 'profile' tags
+  # The 'capabilities:node' is marked on each node in the instackenv.json file
+  ControllerSchedulerHints:
+    'capabilities:node': 'controller%index%'
+  ComputeSchedulerHints:
+    'capabilities:node': 'compute%index%'
+  ComputeHCISchedulerHints:
+    'capabilities:node': 'computehci%index%'
+  CephStorageSchedulerHints:
+    'capabilities:node': 'ceph%index%'
+# BlockStorageSchedulerHints:
+#   'capabilities:node': 'block%index%'
+# ObjectStorageSchedulerHints:
+#   'capabilities:node': 'object%index%'
+
+  OvercloudControllerFlavor: baremetal
+  OvercloudComputeFlavor: baremetal
+  OvercloudComputeHCIFlavor: baremetal
+  OvercloudCephStorageFlavor: baremetal
+# OvercloudBlockStorageFlavor: baremetal
+# OvercloudObjectStorageFlavor: baremetal
+
+  ControllerCount: 1
+  ComputeCount: 2
+  ComputeHCICount: 1
+  CephStorageCount: 1
+# BlockStorageCount: 0
+# ObjectStorageCount: 0
+

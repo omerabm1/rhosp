@@ -1,0 +1,18 @@
+---
+# Playbook
+# Using ReaR on the control plane nodes.
+#- become: true
+#  hosts: ceph_mon
+#  name: Backup ceph authentication
+#  tasks:
+#    - name: Backup ceph authentication role
+#      include_role:
+#        name: backup-and-restore
+#        tasks_from: ceph_authentication
+#      tags:
+#      -  bar_create_recover_image
+- become: true
+  hosts: Controller
+  name: Create the recovery images for the control plane
+  roles:
+  - role: backup-and-restore

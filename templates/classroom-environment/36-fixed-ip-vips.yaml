@@ -1,0 +1,23 @@
+# This template allows the IPs to be preselected for each VIP. Note that
+# this template should be included after other templates which affect the
+# network such as network-isolation.yaml.
+
+resource_registry:
+  OS::TripleO::Network::Ports::ExternalVipPort: /usr/share/openstack-tripleo-heat-templates/network/ports/external.yaml
+  OS::TripleO::Network::Ports::InternalApiVipPort: /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api.yaml
+  OS::TripleO::Network::Ports::StorageVipPort: /usr/share/openstack-tripleo-heat-templates/network/ports/storage.yaml
+  OS::TripleO::Network::Ports::StorageMgmtVipPort: /usr/share/openstack-tripleo-heat-templates/network/ports/storage_mgmt.yaml
+  OS::TripleO::Network::Ports::RedisVipPort: /usr/share/openstack-tripleo-heat-templates/network/ports/vip.yaml
+  OS::TripleO::Network::Ports::OVNDBsVipPort: /usr/share/openstack-tripleo-heat-templates/network/ports/vip.yaml
+
+parameter_defaults:
+  # Set the IP addresses of the VIPs here.
+  # NOTE we will eventually move to one VIP per service
+  #
+  ControlFixedIPs: [{'ip_address':'172.25.249.50'}]
+  PublicVirtualFixedIPs: [{'ip_address':'172.25.250.50'}]
+  InternalApiVirtualFixedIPs: [{'ip_address':'172.24.1.50'}]
+  StorageVirtualFixedIPs: [{'ip_address':'172.24.3.50'}]
+  StorageMgmtVirtualFixedIPs: [{'ip_address':'172.24.4.50'}]
+  RedisVirtualFixedIPs: [{'ip_address':'172.24.1.51'}]
+  OVNDBsVirtualFixedIPs: [{'ip_address':'172.24.1.52'}]

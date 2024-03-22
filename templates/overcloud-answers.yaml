@@ -1,0 +1,71 @@
+templates: /usr/share/openstack-tripleo-heat-templates/
+environments:
+    # RHT custom from environments/composable-roles/monolithic-nonha.yaml
+  - /home/stack/templates/classroom-environment/00-node-info.yaml
+    #
+    # environments/predictable-placement/custom-domain.yaml
+  - /home/stack/templates/classroom-environment/02-custom-domain.yaml
+    #
+    # environments/predictable-placement/custom-hostnames.yaml
+  - /home/stack/templates/classroom-environment/04-custom-hostnames.yaml
+    #
+    # environments/inject-trust-anchor.yaml
+  - /home/stack/templates/classroom-environment/10-inject-trust-anchor.yaml
+    #
+    # environments/low-memory-usage.yaml
+  - /home/stack/templates/classroom-environment/12-low-memory-usage.yaml
+    #
+    # environments/disable-telemetry.yaml
+# Use this template only if all telemetry exercises are eliminated
+#  - /home/stack/templates/classroom-environment/14-disable-telemetry.yaml
+    #
+    # RHT custom
+  - /home/stack/templates/classroom-environment/16-telemetry-optimization.yaml
+    #
+    # RHT custom
+  - /home/stack/templates/classroom-environment/18-compute-extraconfig.yaml
+    #
+    # firstboot/userdata_root_password.yaml
+  - /home/stack/templates/classroom-environment/22-change_root_password-env.yaml
+    #
+    # RHT custom
+  - /home/stack/templates/classroom-environment/24-admin-password.yaml
+    #
+    # environments/network-isolation.yaml
+  - /home/stack/templates/classroom-environment/30-network-isolation.yaml
+    #
+    # environments/network-environment.yaml
+  - /home/stack/templates/classroom-environment/32-network-environment.yaml
+    #
+    # environments/ips-from-pool.yaml
+  - /home/stack/templates/classroom-environment/34-ips-from-pool-all.yaml
+    #
+    # environments/fixed-ip-vips.yaml
+  - /home/stack/templates/classroom-environment/36-fixed-ip-vips.yaml
+    #
+    # environments/services-docker/octavia.yaml
+  - /home/stack/templates/classroom-environment/40-octavia.yaml
+    #
+    # environments/services-docker/neutron-ovn-dvr-ha.yaml
+  - /home/stack/templates/classroom-environment/42-neutron-ovn-dvr-ha.yaml
+    #
+    # environments/ceph-ansible/ceph-ansible.yaml
+  - /home/stack/templates/classroom-environment/50-ceph-ansible.yaml
+    #
+    # RHT custom from environments/storage-environment.yaml
+  - /home/stack/templates/classroom-environment/52-ceph-config.yaml
+    #
+    # environments/ceph-ansible/ceph-mds.yaml
+  - /home/stack/templates/classroom-environment/54-ceph-mds.yaml
+    #
+    # environments/manila-cephfsnative-config.yaml
+  - /home/stack/templates/classroom-environment/55-manila-cephfsnative-config.yaml
+    #
+    # the local_registry_images file is auto-generated and copied in to place
+    #- /home/stack/templates/classroom-environment/90-local_registry_images.yaml
+    #
+    # integrate IdM
+  - /home/stack/templates/classroom-environment/95-idm-integration.yaml
+    #
+    # Include container info and registry credentials
+  - /home/stack/containers-prepare-parameter.yaml
